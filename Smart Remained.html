@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatic SMS Alert</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #77aaff 3px solid;
+        }
+        header h1 {
+            text-align: center;
+            text-transform: uppercase;
+            margin: 0;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+        }
+        form div {
+            margin-bottom: 15px;
+        }
+        form div label {
+            margin-bottom: 5px;
+            display: block;
+        }
+        form div input, form div select {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .welcome {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .time-buttons button {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .time-buttons button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Automatic SMS Alert</h1>
+    </header>
+    <div class="container">
+        <form id="loginForm">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div>
+                <label for="mobile">Mobile No:</label>
+                <input type="tel" id="mobile" name="mobile" required>
+            </div>
+            <div>
+                <label for="email">Email ID:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <button type="submit">Continue</button>
+        </form>
+        <div class="welcome" id="welcomeMessage" style="display: none;">
+            <h2>Welcome to Automatic SMS Alert</h2>
+            <form id="medicineForm">
+                <div>
+                    <label for="medicineType">Type of Medicine:</label>
+                    <select id="medicineType" name="medicineType" required>
+                        <option value="Tablets">Tablets</option>
+                        <option value="Suppositories">Suppositories</option>
+                        <option value="Puffers">Puffers (inhalers)</option>
+                        <option value="Drops">Drops</option>
+                        <option value="Creams">Creams or ointments</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="morningTime">Morning Time:</label>
+                    <input type="time" id="morningTime" name="morningTime" required>
+                </div>
+                <div>
+                    <label for="afternoonTime">Afternoon Time:</label>
+                    <input type="time" id="afternoonTime" name="afternoonTime" required>
+                </div>
+                <div>
+                    <label for="nightTime">Night Time:</label>
+                    <input type="time" id="nightTime" name="nightTime" required>
+                </div>
+                <div>
+                    <label for="contact">Phone No or Email ID:</label>
+                    <input type="text" id="contact" name="contact" required>
+                </div>
+                <button type="submit">Set Alerts</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('welcomeMessage').style.display = 'block';
+        });
+
+        document.getElementById('medicineForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const medicineType = document.getElementById('medicineType').value;
+            const morningTime = document.getElementById('morningTime').value;
+            const afternoonTime = document.getElementById('afternoonTime').value;
+            const nightTime = document.getElementById('nightTime').value;
+            const contact = document.getElementById('contact').value;
+
+            // Placeholder for email/SMS API integration
+            alert(`Alerts set for ${medicineType} at ${morningTime}, ${afternoonTime}, and ${nightTime} to ${contact}.`);
+        });
+    </script>
+</body>
+</html>
