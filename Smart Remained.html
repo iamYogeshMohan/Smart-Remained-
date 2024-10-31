@@ -1,152 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Reminder</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 50%;
-            margin: auto;
-            overflow: hidden;
-        }
-        header {
-            background: #333;
-            color: #fff;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #77aaff 3px solid;
-        }
-        header h1 {
-            text-align: center;
-            text-transform: uppercase;
-            margin: 0;
-        }
-        form {
-            background: #fff;
-            padding: 20px;
-            margin-top: 20px;
-            border: 1px solid #ccc;
-        }
-        form div {
-            margin-bottom: 15px;
-        }
-        form div label {
-            margin-bottom: 5px;
-            display: block;
-        }
-        form div input, form div select {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-        .welcome {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .time-buttons button {
-            margin: 5px;
-            padding: 10px 20px;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-        .time-buttons button:hover {
-            background-color: #555;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Reminder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2em;
+      margin-top: 20px;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      margin: 20px 0;
+    }
+    button, input[type="submit"] {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+    }
+    .form-container {
+      display: none;
+      text-align: left;
+    }
+    .form-container label {
+      font-weight: bold;
+    }
+    .form-container input[type="text"],
+    .form-container input[type="date"],
+    .form-container input[type="email"],
+    .form-container input[type="time"],
+    .form-container select {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+    }
+    .message-box {
+      display: none;
+      background-color: #d4f7d4;
+      padding: 20px;
+      margin: 20px 0;
+      border: 1px solid #4CAF50;
+      font-size: 1.2em;
+      color: #333;
+    }
+  </style>
+  <script>
+    function showForm() {
+      document.getElementById("main-container").style.display = "none";
+      document.getElementById("form-container").style.display = "block";
+    }
+
+    function submitForm() {
+      const name = document.getElementById("name").value;
+      const dob = document.getElementById("dob").value;
+      const phone = document.getElementById("phone").value;
+      const email = document.getElementById("email").value;
+      const medicineType = document.getElementById("medicineType").value;
+      const morningTime = document.getElementById("morning").value;
+      const afternoonTime = document.getElementById("afternoon").value;
+      const nightTime = document.getElementById("night").value;
+
+      document.getElementById("form-container").style.display = "none";
+      document.getElementById("message-box").style.display = "block";
+      document.getElementById("message").innerText = `Reminder set for ${medicineType} at specified times.
+        Notifications will be sent to Phone: ${phone} or Email: ${email}`;
+      
+      // You would send the data to your backend server here for processing SMS or email alerts
+    }
+  </script>
 </head>
 <body>
-    <header>
-        <h1>Smart Reminder</h1>
-    </header>
-    <div class="container">
-        <form id="loginForm">
-            <div>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div>
-                <label for="dob">Date of Birth:</label>
-                <input type="date" id="dob" name="dob" required>
-            </div>
-            <div>
-                <label for="mobile">Mobile No:</label>
-                <input type="tel" id="mobile" name="mobile" required>
-            </div>
-            <div>
-                <label for="email">Email ID:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <button type="submit">Continue</button>
-        </form>
-        <div class="welcome" id="welcomeMessage" style="display: none;">
-            <h2>Welcome to Automatic SMS Alert</h2>
-            <form id="medicineForm">
-                <div>
-                    <label for="medicineType">Type of Medicine:</label>
-                    <select id="medicineType" name="medicineType" required>
-                        <option value="Tablets">Tablets</option>
-                        <option value="Suppositories">Suppositories</option>
-                        <option value="Puffers">Puffers (inhalers)</option>
-                        <option value="Drops">Drops</option>
-                        <option value="Creams">Creams or ointments</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="morningTime">Morning Time:</label>
-                    <input type="time" id="morningTime" name="morningTime" required>
-                </div>
-                <div>
-                    <label for="afternoonTime">Afternoon Time:</label>
-                    <input type="time" id="afternoonTime" name="afternoonTime" required>
-                </div>
-                <div>
-                    <label for="nightTime">Night Time:</label>
-                    <input type="time" id="nightTime" name="nightTime" required>
-                </div>
-                <div>
-                    <label for="contact">Phone No or Email ID:</label>
-                    <input type="text" id="contact" name="contact" required>
-                </div>
-                <button type="submit">Set Alerts</button>
-            </form>
-        </div>
-    </div>
 
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('welcomeMessage').style.display = 'block';
-        });
+  <div id="main-container" class="container">
+    <h1>Smart Reminder</h1>
+    <img src="hospital-image.jpg" alt="Hospital Image">
+    <button onclick="showForm()">Set Medicine Reminder</button>
+  </div>
 
-        document.getElementById('medicineForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const medicineType = document.getElementById('medicineType').value;
-            const morningTime = document.getElementById('morningTime').value;
-            const afternoonTime = document.getElementById('afternoonTime').value;
-            const nightTime = document.getElementById('nightTime').value;
-            const contact = document.getElementById('contact').value;
+  <div id="form-container" class="container form-container">
+    <form id="reminder-form" onsubmit="event.preventDefault(); submitForm();">
+      <h2>Set Your Reminder</h2>
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
 
-            // Placeholder for email/SMS API integration
-            alert(`Alerts set for ${medicineType} at ${morningTime}, ${afternoonTime}, and ${nightTime} to ${contact}.`);
-        });
-    </script>
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" required>
+
+      <label for="phone">Phone No:</label>
+      <input type="text" id="phone" required>
+
+      <label for="email">Email ID:</label>
+      <input type="email" id="email" required>
+
+      <label for="medicineType">Type of Medicine:</label>
+      <select id="medicineType" required>
+        <option value="Tablets">Tablets</option>
+        <option value="Drops">Drops</option>
+        <option value="Creams or Ointments">Creams or Ointments</option>
+        <option value="Puffers (Inhalers)">Puffers (Inhalers)</option>
+        <option value="Liquids">Liquids</option>
+        <option value="Patches">Patches</option>
+        <option value="Pills">Pills</option>
+        <option value="Capsules">Capsules</option>
+        <option value="Suppositories">Suppositories</option>
+        <option value="Needles">Needles</option>
+      </select>
+
+      <label for="morning">Morning Time:</label>
+      <input type="time" id="morning" required>
+
+      <label for="afternoon">Afternoon Time:</label>
+      <input type="time" id="afternoon" required>
+
+      <label for="night">Night Time:</label>
+      <input type="time" id="night" required>
+
+      <input type="submit" value="Set Reminder">
+    </form>
+  </div>
+
+  <div id="message-box" class="container message-box">
+    <p id="message"></p>
+  </div>
+
 </body>
 </html>
